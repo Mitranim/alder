@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Alder</title>
+    <title><%= typeof title !== 'undefined' ? title + ' | Alder' : 'Alder' %></title>
+    <meta name="author" content="mitranim">
+    <meta charset="utf-8">
+    <base href="/alder/">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=2, initial-scale=1, user-scalable=yes">
+    <link rel="stylesheet" type="text/css" href="/alder/styles/app.css">
+    <link rel="icon" href="data:;base64,=">
+  </head>
+
+  <body>
+    <%= $include('partials/banner', $) %>
+
+    <!-- Site content -->
+    <div class="sf-article">
+      <%= $path === 'index' ? $include('$index', $) : $content %>
+    </div>
+
+    <%= $include('partials/footer', $) %>
+
+    <% if (!prod) { %>
+      <script>
+        window.developmentMode = true;
+      </script>
+    <% } %>
+
+    <script src="/alder/scripts/app.js" async></script>
+  </body>
+</html>

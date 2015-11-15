@@ -1,0 +1,13 @@
+# Commonly ignored files
+*.log
+.DS_Store
+
+# Folders
+node_modules
+docs
+test
+gh-pages
+
+# Build-related files
+gulpfile.js
+.babelrc
