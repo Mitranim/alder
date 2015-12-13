@@ -1,0 +1,1 @@
+exports.React = require('./dist/react').React

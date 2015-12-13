@@ -1,22 +1,22 @@
-import {render, unlink} from 'alder'
-// import hljs from 'highlight.js'
-// import Remarkable from 'remarkable'
-
-const unmountQueue = []
+import {renderAt} from 'alder'
+import {watch, stop} from './core'
 
 export function renderTo (selector: string, renderFunc: Function) {
+  const component = auto(renderFunc)
   onload(() => {
     const elements = document.querySelectorAll(selector)
-    ;[].slice.call(elements).forEach(element => {
-      unmountQueue.push(element)
-      render(element, renderFunc)
+    ;[].forEach.call(elements, element => {
+      renderAt(element, component)
     })
   })
 }
 
-document.addEventListener('simple-pjax-before-transition', () => {
-  while (unmountQueue.length) unlink(unmountQueue.shift())
-})
+export function auto (func) {
+  return (render, props) => {
+    const update = watch(() => {render(func(props))})
+    return () => {stop(update)}
+  }
+}
 
 export function onload (callback: Function) {
   if (/loaded|complete|interactive/.test(document.readyState)) {
@@ -27,17 +27,4 @@ export function onload (callback: Function) {
       callback()
     })
   }
-  document.addEventListener('simple-pjax-after-transition', callback)
 }
-
-// function highlight (text, lang) {
-//   const result = lang ? hljs.highlight(lang, text) : hljs.highlightAuto(text)
-//   return `<pre class="hljs">${result.value}</pre>`
-// }
-
-// export const md = new Remarkable({
-//   preset: 'commonmark',
-//   html: true,
-//   typographer: true,
-//   highlight
-// })

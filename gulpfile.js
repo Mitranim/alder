@@ -34,14 +34,11 @@ const src = {
 
 const out = {
   lib: 'dist',
-  test: 'test/**/*.js',
   docHtml: 'gh-pages',
   docScripts: 'gh-pages/scripts',
   docStyles: 'gh-pages/styles',
   docFonts: 'gh-pages/fonts'
 }
-
-const testCommand = require('./package').scripts.test
 
 function reload (done) {
   bsync.reload()
@@ -71,18 +68,10 @@ gulp.task('lib:minify', function () {
     .pipe(gulp.dest(out.lib))
 })
 
-gulp.task('lib:test', function (done) {
-  exec(testCommand, (err, stdout) => {
-    process.stdout.write(stdout)
-    done(err)
-  })
-})
-
 gulp.task('lib:build', gulp.series('lib:clear', 'lib:compile', 'lib:minify'))
 
 gulp.task('lib:watch', function () {
-  $.watch(src.lib, gulp.series('lib:build', 'lib:test'))
-  $.watch(out.test, gulp.series('lib:test'))
+  $.watch(src.lib, gulp.series('lib:build'))
 })
 
 /* --------------------------------- HTML -----------------------------------*/
@@ -137,7 +126,7 @@ function scripts (done) {
       filename: 'app.js'
     },
     resolve: {
-      alias: {alder: pt.join(process.cwd(), 'dist/alder')}
+      alias: {alder: process.cwd()}
     },
     resolveLoader: {
       alias: {md: pt.join(process.cwd(), 'md-loader')}
@@ -163,19 +152,17 @@ function scripts (done) {
   }, onComplete)
 
   function onComplete (err, stats) {
-    if (err) {
-      throw Error(err)
-    } else {
-      const report = stats.toString({
-        colors: true,
-        chunks: false,
-        timings: true,
-        version: false,
-        hash: false,
-        assets: false
-      })
-      if (report) console.log(report)
-    }
+    if (err) throw Error(err)
+    const report = stats.toString({
+      colors: true,
+      chunks: false,
+      timings: true,
+      version: false,
+      hash: false,
+      assets: false
+    })
+    if (report) console.log(report)
+    if (stats.hasErrors() && !watch) throw Error('U FAIL')
     if (watch) bsync.reload()
     else done()
   }
@@ -266,4 +253,4 @@ gulp.task('watch', gulp.parallel(
   'lib:watch', 'docs:scripts:build:watch', 'docs:html:watch', 'docs:styles:watch', 'docs:fonts:watch'
 ))
 
-gulp.task('default', gulp.series('build', 'lib:test', gulp.parallel('watch', 'server')))
+gulp.task('default', gulp.series('build', gulp.parallel('watch', 'server')))

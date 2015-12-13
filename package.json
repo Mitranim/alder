@@ -1,13 +1,11 @@
 {
   "name": "alder",
   "version": "0.0.1",
-  "private": true,
-  "description": "...",
+  "description": "[WIP] React/Reagent/Om-inspired library for dynamic rendering in the browser",
   "main": "dist/alder.js",
   "jsnext:main": "lib/alder.js",
   "scripts": {
     "start": "gulp",
-    "test": "node test/test",
     "serve-prod": "gulp build --prod && gulp server",
     "prepublish": "gulp lib:build && npm test"
   },
@@ -19,9 +17,12 @@
     "type": "git",
     "url": "https://github.com/Mitranim/alder.git"
   },
-  "peerDependencies": {
-    "symphony": ">= 0.0.7"
-  },
+  "keywords": [
+    "rendering",
+    "react",
+    "reagent",
+    "om"
+  ],
   "devDependencies": {
     "babel-core": "^5.8.25",
     "babel-loader": "^5.3.2",
@@ -44,11 +45,9 @@
     "gulp-uglify": "^1.4.2",
     "gulp-watch": "^4.3.5",
     "highlight.js": "^8.9.1",
-    "redux": "^3.0.4",
+    "prax": "0.0.12",
     "remarkable": "^1.6.0",
-    "simple-pjax": "^0.3.0",
     "stylific": "^0.13.0",
-    "symphony": "0.0.7",
     "webpack": "^1.12.2",
     "yargs": "^3.29.0"
   },
