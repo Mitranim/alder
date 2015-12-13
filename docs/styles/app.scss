@@ -61,3 +61,10 @@ a[href].fa {
 .shadow {
   @include sf-shadow-weak;
 }
+
+dfn[data-sf-tooltip] {
+  display: inline-block;
+  // box-shadow: 0 1px 0 0 $sf-color-link;
+  border-bottom: 1px dotted $sf-color-link;
+  cursor: help;
+}

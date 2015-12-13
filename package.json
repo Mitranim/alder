@@ -1,6 +1,6 @@
 {
   "name": "alder",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "[WIP] React/Reagent/Om-inspired library for dynamic rendering in the browser",
   "main": "dist/alder.js",
   "jsnext:main": "lib/alder.js",
@@ -47,7 +47,7 @@
     "highlight.js": "^8.9.1",
     "prax": "0.0.12",
     "remarkable": "^1.6.0",
-    "stylific": "^0.13.0",
+    "stylific": "^0.13.1",
     "webpack": "^1.12.2",
     "yargs": "^3.29.0"
   },

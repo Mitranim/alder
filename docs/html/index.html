@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Alder</title>
-    <title><%= typeof title !== 'undefined' ? title + ' | Alder' : 'Alder' %></title>
+    <title><%= typeof title === 'string' && title ? title + ' | Alder' : 'Alder' %></title>
     <meta name="author" content="mitranim">
     <meta charset="utf-8">
     <base href="/alder/">

@@ -1,20 +1,5 @@
 (TODO)
 
-```javascript
-import {renderAt} from 'alder'
-
-function component (render, props) {
-  render(
-    ['div', {className: 'container'},
-      ['h1', {}, 'Hello ', props.name, '!']]
-  )
-}
-
-const main = document.getElementById('app')
-
-renderAt(main, component, {name: 'world'})
-```
-
 A simple view looks like this:
 
 ```javascript
