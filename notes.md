@@ -1,4 +1,15 @@
-## TODO glossary
+## TODO
+
+* Tracking of children by key
+* Consider if linking should happen after the first props sync
+
+
+## Tracking
+
+For plain drafts, child nodes can be found by pattern matching. We only consider
+shifts and not swaps. The primary use case to support is when nodes are omitted
+or inserted on the fly. In Alder, this use case is supported automatically by
+the virtue of replacing null nodes with placeholder comments.
 
 
 ## Updating

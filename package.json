@@ -1,6 +1,6 @@
 {
   "name": "alder",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "[WIP] React/Reagent/Om-inspired library for dynamic rendering in the browser",
   "main": "dist/alder.js",
   "jsnext:main": "lib/alder.js",
