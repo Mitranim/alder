@@ -1,17 +1,17 @@
 ## Overview
 
 Unlike most libraries and frameworks that deal with rendering, Alder doesn't
-allow you to keep <dfn id="state" data-sf-tooltip="Persistent data that
-changes over time">state</dfn> in the view layer. It's inspired by functional
-programming techniques, one of which is to _isolate state_ to as few places
-as possible.
+allow you to keep
+<dfn id="state" data-sf-tooltip="Persistent data that changes over time">state</dfn>
+in the view layer. It's inspired by functional programming techniques, one of
+which is to _isolate state_ to as few places as possible.
 
 This means you need some place to store your application data, and some way to
 notify views about changes.
 
 The recommended way to manage state in Alder is with
 <a href="https://github.com/Mitranim/prax" target="_blank">Prax</a>.
-It's a library that helps you manage state and provides change detection for
+It's a library for managing immutable state that provides change detection for
 extremely efficient view updates. It also helps you organise app events in a
 message-passing style. Alternatively, you can use any data library with some
 kind of event system, such as Redux or JSData. These examples will use Prax.

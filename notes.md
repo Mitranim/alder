@@ -1,15 +1,19 @@
 ## TODO
 
-* Tracking of children by key
+* Child tracking and matching by key (see below)
 * Consider if linking should happen after the first props sync
 
 
 ## Tracking
 
-For plain drafts, child nodes can be found by pattern matching. We only consider
-shifts and not swaps. The primary use case to support is when nodes are omitted
-or inserted on the fly. In Alder, this use case is supported automatically by
-the virtue of replacing null nodes with placeholder comments.
+Two use cases:
+* omitting or including nodes in static positions (conditionally rendering null)
+* mapping a collection to children
+
+The "static" use case is supported automatically through placeholder comments.
+
+The "dynamic" use case appears to require tracking with keys, which is currently
+NYI.
 
 
 ## Updating
@@ -27,24 +31,6 @@ the virtue of replacing null nodes with placeholder comments.
       X  +  ===  +      ===       -> teardown, setup
      === +   X   +      ===       -> teardown, setup
      === +  ===  +       ?        -> ???
-
-
-## Misc
-
-Don't put DOM manipulation in setup and teardown functions. They're not related
-to the lifetimes of DOM nodes. Between setup and teardown, a render function can
-produce different DOM nodes that replace each other. Instead, include `onLink`
-and `onUnlink` functions into the props of the DOM nodes you wish to manipulate.
-Contrived example:
-
-    const component = {
-      render: () => (
-        ['div', {onLink () {this.classList.add('visible')},
-                 onUnlink () {this.classList.remove('visible')}}, '...']
-      ),
-      setup () {/* ... */},
-      teardown () {/* ... */}
-    }
 
 
 ## Setup / Teardown

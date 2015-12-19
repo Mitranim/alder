@@ -2,17 +2,22 @@
 
 Alder is a library for writing dynamic user interfaces in JavaScript. It's a
 fresh reimplementation of ideas popularised by React, driven further in the
-direction of functional programming. It's also inspired by ideas from
-Reagent/Om/Clojure.
+direction of functional programming, inspired by Reagent/Om.
 
-It's around 20 times lighter than React (≈ 5 KB minified) and has a much
+It's around 20 times lighter than React (≈ 6 KB minified) and has a much
 smaller API surface, but manages to solve most of the same problems.
 
 Differences from React:
 * components are functions
 * no classes
 * no local component state
-* DOM is represented with plain JS objects; JSX is unnecessary, but optionally [available](jsx/)
+  <sup class="tooltip-host">
+    [<span class="counter"></span>] <span class="tooltip">see [state management](state/)</span>
+  </sup>
+* DOM is represented with plain JS objects; JSX is unnecessary
+  <sup class="tooltip-host">
+    [<span class="counter"></span>] <span class="tooltip">see [usage with jsx](jsx/)</span>
+  </sup>
 * native DOM events are not abstracted away
 
 Separation of concerns without separation of technologies.
@@ -22,6 +27,9 @@ Supports IE9+.
 ## Examples (ToDo)
 
 "Hello world" in Alder:
+  <sup class="tooltip-host">
+    [<span class="counter"></span>] <span class="tooltip">examples use `require` due to code highlighter limitations</span>
+  </sup>
 
 ```javascript
 const {renderAt} = require('alder')

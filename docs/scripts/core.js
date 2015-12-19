@@ -10,7 +10,8 @@ import {immute, replaceAtPath, mergeAtPath} from 'prax'
 export const atom = createAtom(immute({
   stamp: null,
   key: null,
-  persons: {}
+  persons: {},
+  iterable: ['one', 'two', 'three']
 }))
 
 export const {read, watch, stop} = atom

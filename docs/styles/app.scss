@@ -7,6 +7,8 @@
 // @import './node_modules/highlight.js/styles/atelier-seaside.light';
 // @import './node_modules/highlight.js/styles/github-gist';
 
+@import './tooltip';
+
 /*********************************** Misc ************************************/
 
 .fa.inline, .fa:not(:empty)::before {
@@ -62,9 +64,20 @@ a[href].fa {
   @include sf-shadow-weak;
 }
 
-dfn[data-sf-tooltip] {
-  display: inline-block;
-  // box-shadow: 0 1px 0 0 $sf-color-link;
-  border-bottom: 1px dotted $sf-color-link;
-  cursor: help;
+article, .sf-article {
+  counter-reset: n;
+}
+
+.counter::before {
+  content: counter(n);
+  counter-increment: n;
+}
+
+article, .sf-article {
+  [data-sf-tooltip], .tooltip-host {
+    display: inline-block;
+    // box-shadow: 0 1px 0 0 $sf-color-link;
+    border-bottom: 1px dotted $sf-color-link;
+    cursor: help;
+  }
 }

@@ -6,7 +6,7 @@ import './jsx'
 const displayState = auto(() => (
   ['pre', {className: 'flex-1 pad',
            onclick () {console.log('clicked:', this)},
-           onLink () {console.log('-- linking:', this)},
+           onLink () {console.log('-- linking state elem:', this)},
            onUnlink () {console.log('-- unlinking:', this)}},
     JSON.stringify(read(), null, 2)]
 ))
@@ -23,7 +23,7 @@ renderTo('[data-state]', state)
 function state () {
   return (
     ['div', {className: 'row-between-stretch',
-             onMount () {console.log('-- mounting node:', this)}},
+             onLink () {console.log('-- linking root elem:', this)}},
       [displayState], [editState]]
   )
 }
@@ -36,9 +36,20 @@ function submitState (event) {
 }
 
 renderTo('[data-unsafe]', () => (
-  ['div', {innerHTML: '<strong>this is <em>unsafe</em> HTML</strong>'}]
+  ['div', {innerHTML: '<strong>this is <em>potentially unsafe</em> HTML</strong>'}]
 ))
 
 renderTo('[data-safe]', () => (
   ['div', {textContent: '<strong>this is safe text content</strong>'}]
 ))
+
+renderTo('[data-iterable]', () => (
+  ['div', null,
+    (read('iterable') || []).map((item, index) => (
+      index ?
+      ['p', {'data-key': item, onLink, onUnlink}, item]
+      : null))]
+))
+
+function onLink () {console.log('-- linking:', this)}
+function onUnlink () {console.log('-- unlinking:', this)}
