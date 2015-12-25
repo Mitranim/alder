@@ -1,9 +1,9 @@
 import {renderTo, auto} from './utils'
-import {read, send} from './core'
+import {set} from './core'
 import './input'
 import './jsx'
 
-const displayState = auto(() => (
+const displayState = auto((props, read) => (
   ['pre', {className: 'flex-1 pad',
            onclick () {console.log('clicked:', this)},
            onLink () {console.log('-- linking state elem:', this)},
@@ -11,7 +11,7 @@ const displayState = auto(() => (
     JSON.stringify(read(), null, 2)]
 ))
 
-const editState = auto(() => (
+const editState = auto((props, read) => (
   ['div', {className: 'flex-1'},
     ['form', {className: 'wide', onsubmit: submitState},
       ['textarea', {name: 'text', rows: 16, className: 'wide text-monospace',
@@ -32,7 +32,7 @@ function submitState (event) {
   event.preventDefault()
   const text = event.target.text.value.trim()
   const value = JSON.parse(text)
-  send({type: 'set', path: [], value})
+  set([], value)
 }
 
 renderTo('[data-unsafe]', () => (
@@ -43,7 +43,7 @@ renderTo('[data-safe]', () => (
   ['div', {textContent: '<strong>this is safe text content</strong>'}]
 ))
 
-renderTo('[data-iterable]', () => (
+renderTo('[data-iterable]', (props, read) => (
   ['div', null,
     (read('iterable') || []).map((item, index) => (
       index ?

@@ -11,10 +11,11 @@ export function renderTo (selector: string, renderFunc: Function) {
   })
 }
 
-export function auto (func) {
-  return (render, props) => {
-    const update = watch(() => {render(func(props))})
-    return () => {stop(update)}
+export function auto (view) {
+  return function component (render, props) {
+    function update (read) {render(view(props, read))}
+    watch(update)
+    return function unsub () {stop(update)}
   }
 }
 

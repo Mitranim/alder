@@ -3,27 +3,26 @@
  */
 
 import {renderTo, auto} from './utils'
-import {read} from './core'
 import './input'
 import {React} from 'alder/react'
 
-renderTo('[data-stamp]', () => (
+renderTo('[data-stamp]', (props, read) => (
   <div>
     <p>ms elapsed since page load: {read('stamp')}</p>
   </div>
 ))
 
-renderTo('[data-key]', () => (
+renderTo('[data-key]', (props, read) => (
   <div>
     <p>last pressed key's code: {read('key')}</p>
   </div>
 ))
 
-const personName = auto(props => (
+const personName = auto((props, read) => (
   <p>name: {read('persons', props.id, 'name')}</p>
 ))
 
-const personAge = auto(props => (
+const personAge = auto((props, read) => (
   <p>age: {read('persons', props.id, 'age')}</p>
 ))
 

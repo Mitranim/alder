@@ -1,39 +1,13 @@
-import {send, match, set} from './core'
+import {send, match, set, patch} from './core'
 
-match(isArray, msgs => {
-  let step
-  msgs.forEach(msg => {
-    if (step) step = step.then(() => {send(msg)})
-    else if (isPromise(msg)) step = msg.then(send)
-    else send(msg)
-  })
-})
+match({type: 'person/update'}, ({value}) => {
+  const {id} = value
 
-match({type: 'personUpdate'}, ({value}) => {
-  // This will execute as a sequence.
-  send([
-    {
-      type: 'patch',
-      value: {
-        persons: {[value.id]: {id: value.id, loading: true}}
-      }
-    },
-    new Promise(resolve => {
-      setTimeout(() => {
-        resolve({
-          type: 'patch',
-          value: {persons: {[value.id]: value}}
-        })
-      }, 1000)
-    }),
-    // Will wait until the promise is resolved.
-    {
-      type: 'patch',
-      value: {
-        persons: {[value.id]: {loading: false}}
-      }
-    }
-  ])
+  patch(['persons', id], {id, loading: true})
+
+  setTimeout(() => {
+    patch(['persons', id], {...value, loading: false})
+  }, 1000)
 })
 
 /**
@@ -51,7 +25,7 @@ match('init', () => {
 
   function mockUpdate () {
     send({
-      type: 'personUpdate',
+      type: 'person/update',
       value: {
         id: 1,
         ...persons[++i % persons.length]
@@ -63,24 +37,10 @@ match('init', () => {
   setInterval(mockUpdate, 2000)
 
   setInterval(() => {
-    // send({type: 'patch', value: {stamp: window.performance.now() | 0}})
-    set('stamp', window.performance.now() | 0)
+    set(['stamp'], window.performance.now() | 0)
   }, 1000)
 
   document.addEventListener('keypress', event => {
-    // send({type: 'set', path: ['key'], value: event.keyCode})
-    set('key', event.keyCode)
+    set(['key'], event.keyCode)
   })
 })
-
-/**
- * Utils
- */
-
-function isArray (value) {
-  return value instanceof Array
-}
-
-function isPromise (value) {
-  return value && typeof value.then === 'function' && typeof value.catch === 'function'
-}
