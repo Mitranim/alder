@@ -1,3 +1,5 @@
+<!-- {% extend('index.html', {title: 'Examples'}) %} } -->
+
 (TODO)
 
 A simple view looks like this:

@@ -1,6 +1,6 @@
 <div class="row-between-stretch">
   <a href="" class="flex-1 col-center-start pad">
-    <h1><%= typeof title === 'string' && title || 'Alder (work in progress)' %></h1>
+    <h1>{{typeof title === 'string' && title || 'Alder (work in progress)'}}</h1>
   </a>
   <span class="col-center-center pad text-size-double">
     <a href="https://github.com/Mitranim/alder" target="_blank" class="fa fa-github pop dark"></a>
@@ -9,12 +9,11 @@
 </div>
 
 <div class="sf-navbar sf-navbar-tabs">
-  <a href="" ${$act('index', $)}>overview</a>
-  <a href="quickstart/" ${$act('quickstart', $)}>quickstart</a>
-  <a href="examples/" ${$act('examples', $)}>examples</a>
-  <a href="api/" ${$act('api', $)}>api</a>
-  <a href="state/" ${$act('state', $)}>state</a>
-  <!-- <a href="lifecycle/" ${$act('lifecycle', $)}>lifecycle</a> -->
-  <a href="jsx/" ${$act('jsx', $)}>jsx</a>
-  <a href="server/" ${$act('server', $)}>server</a>
+  <a href="" {{active('index')}}>overview</a>
+  <a href="quickstart/" {{active('quickstart')}}>quickstart</a>
+  <a href="examples/" {{active('examples')}}>examples</a>
+  <a href="api/" {{active('api')}}>api</a>
+  <a href="state/" {{active('state')}}>state</a>
+  <a href="jsx/" {{active('jsx')}}>jsx</a>
+  <a href="server/" {{active('server')}}>server</a>
 </div>

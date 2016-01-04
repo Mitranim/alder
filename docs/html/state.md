@@ -1,3 +1,5 @@
+<!-- {% extend('index.html', {title: 'State Management'}) %} } -->
+
 ## Overview
 
 Unlike most libraries and frameworks that deal with rendering, Alder doesn't

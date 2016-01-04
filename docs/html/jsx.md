@@ -1,3 +1,5 @@
+<!-- {% extend('index.html', {title: 'Usage with JSX'}) %} } -->
+
 ## Overview
 
 Alder works with React's JSX. Useful if:

@@ -1,3 +1,5 @@
+<!-- {% extend('index.html', {title: 'Server Rendering'}) %} } -->
+
 ## Overview
 
 Alder has an optional module for rendering components to string. This can be

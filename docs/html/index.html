@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= typeof title === 'string' && title ? title + ' | Alder' : 'Alder' %></title>
+    <title>{{typeof title !== 'undefined' ? title + ' | Alder' : 'Alder'}}</title>
     <meta name="author" content="mitranim">
     <meta charset="utf-8">
     <base href="/alder/">
@@ -9,22 +9,22 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=2, initial-scale=1, user-scalable=yes">
     <link rel="stylesheet" type="text/css" href="/alder/styles/app.css">
     <link rel="icon" href="data:;base64,=">
-    <% if (!prod) { %>
+    {% if (!prod) { %}
       <script>
         window.developmentMode = true;
       </script>
-    <% } %>
+    {% } %}
     <script src="/alder/scripts/app.js"></script>
   </head>
 
   <body>
-    <%= $include('partials/banner', $) %>
+    {{include('partials/banner.html')}}
 
     <!-- Site content -->
     <div class="sf-article">
-      <%= $path === 'index' ? $include('$index', $) : $content %>
+      {{path === 'index.html' ? include('$index.html') : content}}
     </div>
 
-    <%= $include('partials/footer', $) %>
+    {{include('partials/footer.html')}}
   </body>
 </html>

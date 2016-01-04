@@ -12,7 +12,6 @@
 const $ = require('gulp-load-plugins')()
 const bsync = require('browser-sync').create()
 const del = require('del')
-const exec = require('child_process').exec
 const flags = require('yargs').boolean('prod').argv
 const gulp = require('gulp')
 const hjs = require('highlight.js')
@@ -96,7 +95,10 @@ gulp.task('docs:html:compile', function () {
     // Add hljs code class.
     .pipe($.replace(/<pre><code class="(.*)">|<pre><code>/g, '<pre><code class="hljs $1">'))
     .pipe(filterMd.restore)
-    .pipe($.statil({imports: {prod: flags.prod}}))
+    .pipe($.statil({
+      imports: {prod: flags.prod},
+      ignorePaths: path => /\$index|partials/.test(path)
+    }))
     // Change each `<filename>` into `<filename>/index.html`.
     .pipe($.rename(function (path) {
       switch (path.basename + path.extname) {
