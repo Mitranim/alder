@@ -1,0 +1,41 @@
+.text-monospace {
+  font-family: $sf-font-family-monospace;
+  font-size: 14/16 * 1em;
+}
+
+article, .sf-article {
+  counter-reset: n;
+}
+
+.counter::before {
+  content: counter(n);
+  counter-increment: n;
+}
+
+// article, .sf-article {
+//   [data-sf-tooltip], .tooltip-host {
+//     display: inline-block;
+//     // box-shadow: 0 1px 0 0 $sf-color-link;
+//     border-bottom: 1px dotted $sf-color-link;
+//     cursor: help;
+//   }
+// }
+
+code, pre {
+  background-color: aliceblue;
+}
+
+/**
+ * nav
+ */
+
+.nav-h > * {
+  display: inline-block;
+  padding: $sf-space / 2;
+  &:hover, &:focus {
+    background-color: rgba(gray, 0.1);
+  }
+  &.active {
+    box-shadow: inset 0 -3px 0 0;
+  }
+}

@@ -1,5 +1,4 @@
-import {createAtom, createMb} from 'prax'
-import {asyncStrategy} from 'prax/async'
+import {createAtom, watcher} from 'prax'
 
 /**
  * State
@@ -10,17 +9,21 @@ export const atom = createAtom({
   key: null,
   persons: {},
   iterable: ['one', 'two', 'three']
-}, asyncStrategy)
+})
 
-export const {read, set, patch, watch, stop} = atom
+export const {read, set, patch, monitor} = atom
 
 /**
- * Message Bus
+ * Rendering
  */
 
-const mb = createMb()
-
-export const {send, match} = mb
+export function auto (view) {
+  return function component (render, props) {
+    return monitor(watcher(read => {
+      render(view(props, read))
+    }))
+  }
+}
 
 /**
  * App Logic
@@ -28,15 +31,10 @@ export const {send, match} = mb
 
 require('./factors')
 
-send('init')
-
 /**
  * Utils
  */
 
 if (window.developmentMode) {
   window.atom = atom
-  window.read = read
-  window.mb = mb
-  window.send = send
 }

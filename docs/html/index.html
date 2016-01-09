@@ -1,30 +1,25 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>{{typeof title !== 'undefined' ? title + ' | Alder' : 'Alder'}}</title>
-    <meta name="author" content="mitranim">
-    <meta charset="utf-8">
-    <base href="/alder/">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=2, initial-scale=1, user-scalable=yes">
-    <link rel="stylesheet" type="text/css" href="/alder/styles/app.css">
-    <link rel="icon" href="data:;base64,=">
-    {% if (!prod) { %}
-      <script>
-        window.developmentMode = true;
-      </script>
-    {% } %}
-    <script src="/alder/scripts/app.js"></script>
-  </head>
+<!doctype html>
 
-  <body>
-    {{include('partials/banner.html')}}
+<meta charset="utf-8">
+<title>{{typeof title === 'string' ? title + ' | Alder' : 'Alder'}}</title>
+<base href="/alder/">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=2, initial-scale=1, user-scalable=yes">
+<link rel="stylesheet" href="/alder/styles/app.css">
+<link rel="icon" href="data:;base64,=">
 
-    <!-- Site content -->
-    <div class="sf-article">
-      {{path === 'index.html' ? include('$index.html') : content}}
-    </div>
+<body></body>
 
-    {{include('partials/footer.html')}}
-  </body>
-</html>
+{{include('partials/nav.html')}}
+
+<article>
+  {{path === 'index.html' ? include('partials/index.md') : content}}
+</article>
+
+{% if (!prod) { %}
+  <script>
+    window.developmentMode = true;
+  </script>
+{% } %}
+
+<script src="/alder/scripts/app.js" async></script>

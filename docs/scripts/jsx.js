@@ -2,7 +2,8 @@
  * Alder can be used with JSX!
  */
 
-import {renderTo, auto} from './utils'
+import {renderTo} from './utils'
+import {auto} from './core'
 import './input'
 import {React} from 'alder/react'
 

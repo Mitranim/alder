@@ -1,4 +1,4 @@
-<!-- {% extend('index.html', {title: 'Props'}) %} } -->
+{% extend('index.html', {title: 'Props'}) %}
 
 (TODO)
 

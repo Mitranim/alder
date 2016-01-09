@@ -1,4 +1,4 @@
-<!-- {% extend('index.html', {title: 'State Management'}) %} } -->
+{% extend('index.html', {title: 'State Management'}) %}
 
 ## Overview
 
@@ -23,7 +23,7 @@ kind of event system, such as Redux or JSData. These examples will use Prax.
 (See the Prax quickstart to learn about atoms.)
 
 ```javascript
-const {createAtom} = require('prax')
+import {createAtom} from 'prax'
 
 const atom = createAtom()
 const {watch, stop} = atom
@@ -44,7 +44,7 @@ Now use this `auto` function to create auto-updating views with minimal noise.
 ## Usage
 
 ```javascript
-const {renderAt} = require('alder')
+import {renderAt} from 'alder'
 
 // Using `read` implicitly establishes a subscription.
 const hello = auto(props => (

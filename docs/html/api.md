@@ -1,4 +1,4 @@
-<!-- {% extend('index.html', {title: 'API'}) %} } -->
+{% extend('index.html', {title: 'API'}) %}
 
 (TODO)
 

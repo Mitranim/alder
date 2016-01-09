@@ -1,4 +1,4 @@
-<!-- {% extend('index.html', {title: 'Server Rendering'}) %} } -->
+{% extend('index.html', {title: 'Server Rendering'}) %}
 
 ## Overview
 

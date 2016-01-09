@@ -1,5 +1,5 @@
 import {renderAt} from 'alder'
-import {watch, stop} from './core'
+import {auto} from './core'
 
 export function renderTo (selector: string, renderFunc: Function) {
   const component = auto(renderFunc)
@@ -9,14 +9,6 @@ export function renderTo (selector: string, renderFunc: Function) {
       renderAt(element, component)
     })
   })
-}
-
-export function auto (view) {
-  return function component (render, props) {
-    function update (read) {render(view(props, read))}
-    watch(update)
-    return function unsub () {stop(update)}
-  }
 }
 
 export function onload (callback: Function) {

@@ -1,5 +1,6 @@
-import {renderTo, auto} from './utils'
-import {set} from './core'
+import 'simple-pjax'
+import {renderTo} from './utils'
+import {set, auto} from './core'
 import './input'
 import './jsx'
 

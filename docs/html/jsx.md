@@ -1,4 +1,4 @@
-<!-- {% extend('index.html', {title: 'Usage with JSX'}) %} } -->
+{% extend('index.html', {title: 'Usage with JSX'}) %}
 
 ## Overview
 
@@ -15,7 +15,7 @@ that emulates `React.createElement`. Import or copy it into your source, and
 you can write JSX.
 
 ```javascript
-const {React} = require('alder/react')
+import {React} from 'alder/react'
 
 function Component (render, props) {
   render (
