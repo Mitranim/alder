@@ -1,0 +1,74 @@
+<!doctype html>
+
+<base href="/alder/">
+<meta charset="utf-8">
+<title>Alder</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=2, initial-scale=1, user-scalable=yes">
+<link rel="stylesheet" href="styles/app.css">
+<link rel="icon" href="data:;base64,=">
+
+<body></body>
+
+<nav class="nav-h text-larger" style="margin-bottom: 2rem">
+  <a href="" class="active">overview</a>
+  <a href="examples/" >examples</a>
+  <a href="api/" >api</a>
+  <a href="state/" >state</a>
+  <a href="jsx/" >jsx</a>
+  <a href="server/" >server</a>
+  <a href="https://github.com/Mitranim/alder" target="_blank" class="fa fa-github"></a>
+</nav>
+
+
+<article>
+  <h2 id="overview">Overview</h2>
+<p>Alder is a library for writing dynamic user interfaces in JavaScript. It’s a
+fresh reimplementation of ideas popularised by React, driven further in the
+direction of functional programming under inspiration from Reagent and Om.</p>
+<p>It’s around 20 times lighter than React (≈ 6 KB minified) and has a much
+smaller API surface, but manages to solve most of the same problems.</p>
+<p>Differences from React:</p>
+<ul>
+<li>components are functions</li>
+<li>no classes</li>
+<li>no local component state
+<sup class="tooltip-host">
+  [<span class="counter"></span>] <span class="tooltip">see <a href="state/">state management</a></span>
+</sup></li>
+<li>DOM is represented with plain JS objects; JSX is unnecessary
+<sup class="tooltip-host">
+  [<span class="counter"></span>] <span class="tooltip">see <a href="jsx/">usage with jsx</a></span>
+</sup></li>
+<li>native DOM events are not abstracted away</li>
+</ul>
+<p>Separation of concerns without separation of technologies.</p>
+<p>Supports IE9+.</p>
+<h2 id="examples-todo-">Examples (ToDo)</h2>
+<p>“Hello world” in Alder:</p>
+<pre><code class="hljs lang-javascript"><span class="hljs-keyword">import</span> {renderAt} <span class="hljs-keyword">from</span> <span class="hljs-string">'alder'</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">component</span> (<span class="hljs-params">render, props</span>) </span>{
+  render(
+    [<span class="hljs-string">'div'</span>, {className: <span class="hljs-string">'container'</span>},
+      [<span class="hljs-string">'h1'</span>, {}, <span class="hljs-string">'Hello '</span>, props.name, <span class="hljs-string">'!'</span>]]
+  )
+}
+
+<span class="hljs-keyword">const</span> root = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'app'</span>)
+
+renderAt(root, component, {name: <span class="hljs-string">'world'</span>})
+</code></pre>
+<div data-state></div>
+<div data-input></div>
+<div data-unsafe></div>
+<div data-safe></div>
+<div data-stamp></div>
+<div data-key></div>
+<div data-person></div>
+
+</article>
+
+
+
+<script src="scripts/app.js" async></script>

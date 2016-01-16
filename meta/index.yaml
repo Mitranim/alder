@@ -1,0 +1,15 @@
+ignore: \$index
+
+files:
+  - name: api
+    title: API
+  - name: examples
+    title: Examples
+  - name: jsx
+    title: Usage With JSX
+  - name: quickstart
+    title: Quickstart
+  - name: server
+    title: Server Rendering
+  - name: state
+    title: State Management

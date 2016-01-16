@@ -1,0 +1,76 @@
+<!doctype html>
+
+<base href="/alder/">
+<meta charset="utf-8">
+<title>State Management | Alder</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=2, initial-scale=1, user-scalable=yes">
+<link rel="stylesheet" href="styles/app.css">
+<link rel="icon" href="data:;base64,=">
+
+<body></body>
+
+<nav class="nav-h text-larger" style="margin-bottom: 2rem">
+  <a href="" >overview</a>
+  <a href="examples/" >examples</a>
+  <a href="api/" >api</a>
+  <a href="state/" class="active">state</a>
+  <a href="jsx/" >jsx</a>
+  <a href="server/" >server</a>
+  <a href="https://github.com/Mitranim/alder" target="_blank" class="fa fa-github"></a>
+</nav>
+
+
+<article>
+  <h2 id="overview">Overview</h2>
+<p>Unlike most libraries and frameworks that deal with rendering, Alder doesn’t
+allow you to keep
+<dfn id="state" data-sf-tooltip="Persistent data that changes over time">state</dfn>
+in the view layer. It’s inspired by functional programming techniques, one of
+which is to <em>isolate state</em> to as few places as possible.</p>
+<p>This means you need some place to store your application data, and some way to
+notify views about changes.</p>
+<p>The recommended way to manage state for Alder is with
+<a href="https://github.com/Mitranim/prax" target="_blank">Prax</a>.
+It’s a library for managing immutable state that provides change detection for
+extremely efficient view updates. It also helps you organise app events in a
+message-passing style. Alternatively, you can use any data library with some
+kind of event system, such as Redux or JSData. These examples will use Prax.</p>
+<h2 id="setup">Setup</h2>
+<p>(See the Prax quickstart to learn about atoms.)</p>
+<pre><code class="hljs lang-javascript"><span class="hljs-keyword">import</span> {createAtom} <span class="hljs-keyword">from</span> <span class="hljs-string">'prax'</span>
+
+<span class="hljs-keyword">const</span> atom = createAtom()
+<span class="hljs-keyword">const</span> {watch} = atom
+
+<span class="hljs-keyword">const</span> auto = component =&gt; (render, props) =&gt; {
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">update</span> (<span class="hljs-params">read</span>) </span>{render(component(props, read))}
+
+  <span class="hljs-comment">// This immediately calls `update`, sets up a subscription, and returns</span>
+  <span class="hljs-comment">// an 'unsubscribe' function that will be called by Alder later.</span>
+  <span class="hljs-keyword">return</span> watch(update)
+}
+</code></pre>
+<p>Now use this <code>auto</code> function to create auto-updating views with minimal noise.</p>
+<h2 id="usage">Usage</h2>
+<pre><code class="hljs lang-javascript"><span class="hljs-keyword">import</span> {renderAt} <span class="hljs-keyword">from</span> <span class="hljs-string">'alder'</span>
+
+<span class="hljs-comment">// Using `read` implicitly establishes a subscription.</span>
+<span class="hljs-keyword">const</span> hello = auto((props, read) =&gt; (
+  [<span class="hljs-string">'div'</span>, {className: <span class="hljs-string">'greeting'</span>}, <span class="hljs-string">'Hello '</span>, read(<span class="hljs-string">'name'</span>), <span class="hljs-string">'!'</span>]
+))
+
+renderAt(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'app'</span>), hello)
+
+<span class="hljs-comment">// Update the view twice.</span>
+atom.write({name: <span class="hljs-string">'world'</span>})
+atom.write({name: <span class="hljs-string">'me heartie'</span>})
+</code></pre>
+<p>That’s all you need. Prax will call the update function only when the data read
+by the view <em>really</em> has changed.</p>
+
+</article>
+
+
+
+<script src="scripts/app.js" async></script>

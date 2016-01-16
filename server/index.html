@@ -1,0 +1,49 @@
+<!doctype html>
+
+<base href="/alder/">
+<meta charset="utf-8">
+<title>Server Rendering | Alder</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=2, initial-scale=1, user-scalable=yes">
+<link rel="stylesheet" href="styles/app.css">
+<link rel="icon" href="data:;base64,=">
+
+<body></body>
+
+<nav class="nav-h text-larger" style="margin-bottom: 2rem">
+  <a href="" >overview</a>
+  <a href="examples/" >examples</a>
+  <a href="api/" >api</a>
+  <a href="state/" >state</a>
+  <a href="jsx/" >jsx</a>
+  <a href="server/" class="active">server</a>
+  <a href="https://github.com/Mitranim/alder" target="_blank" class="fa fa-github"></a>
+</nav>
+
+
+<article>
+  <h2 id="overview">Overview</h2>
+<p>Alder has an optional module for rendering components to string. This can be
+used to implement server-side rendering and isomorphic applications.</p>
+<h2 id="usage">Usage</h2>
+<pre><code class="hljs lang-javascript"><span class="hljs-keyword">import</span> {renderToString} <span class="hljs-keyword">from</span> <span class="hljs-string">'alder/string'</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">component</span> (<span class="hljs-params">render, props</span>) </span>{
+  render(
+    [<span class="hljs-string">'div'</span>, {className: <span class="hljs-string">'greeting'</span>}, <span class="hljs-string">'Hello '</span>, props.name, <span class="hljs-string">'!'</span>]
+  )
+}
+
+<span class="hljs-built_in">console</span>.log(renderToString(component, {name: <span class="hljs-string">'world'</span>}))
+</code></pre>
+<p>This will print:</p>
+<pre><code class="hljs lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"greeting"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Hello <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>world<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>!<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
+<p>Some properties, such as <code>className</code>, are automatically converted into
+corresponding attributes, such as <code>class</code>. Non-primitive properties are ignored.</p>
+
+</article>
+
+
+
+<script src="scripts/app.js" async></script>

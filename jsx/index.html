@@ -1,0 +1,101 @@
+<!doctype html>
+
+<base href="/alder/">
+<meta charset="utf-8">
+<title>Usage with JSX | Alder</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=2, initial-scale=1, user-scalable=yes">
+<link rel="stylesheet" href="styles/app.css">
+<link rel="icon" href="data:;base64,=">
+
+<body></body>
+
+<nav class="nav-h text-larger" style="margin-bottom: 2rem">
+  <a href="" >overview</a>
+  <a href="examples/" >examples</a>
+  <a href="api/" >api</a>
+  <a href="state/" >state</a>
+  <a href="jsx/" class="active">jsx</a>
+  <a href="server/" >server</a>
+  <a href="https://github.com/Mitranim/alder" target="_blank" class="fa fa-github"></a>
+</nav>
+
+
+<article>
+  <h2 id="overview">Overview</h2>
+<p>Alder works with React’s JSX. Useful if:</p>
+<ul>
+<li>You prefer JSX markup over plain JavaScript</li>
+<li>You want to be able to easily migrate to React</li>
+<li>You’re migrating from React to Alder</li>
+</ul>
+<h2 id="usage">Usage</h2>
+<p>Alder has an extremely simple
+<a href="https://github.com/Mitranim/alder/blob/master/lib/react.js" target="_blank">utility</a>
+that emulates <code>React.createElement</code>. Import or copy it into your source, and
+you can write JSX.</p>
+<pre><code class="hljs lang-javascript"><span class="hljs-keyword">import</span> {React} <span class="hljs-keyword">from</span> <span class="hljs-string">'alder/react'</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Component</span> (<span class="hljs-params">render, props</span>) </span>{
+  render (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'greeting'</span>&gt;</span>Hello world!<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  )</span>
+}
+
+<span class="hljs-comment">// Equivalent to:</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">component</span> (<span class="hljs-params">render, props</span>) </span>{
+  render (
+    [<span class="hljs-string">'div'</span>, {className: <span class="hljs-string">'greeting'</span>}, <span class="hljs-string">'Hello world!'</span>]
+  )
+}
+</code></pre>
+<h2 id="differences">Differences</h2>
+<p>Alder provides only <code>React.createElement</code> to enable JSX. It doesn’t attempt to
+emulate any other React API.</p>
+<h3 id="capitalisation">Capitalisation</h3>
+<p>JSX relies on capitalisation to distinguish between tags and identifiers. When
+using JSX, you’ll need to capitalise component names.</p>
+<p>Without JSX:</p>
+<pre><code class="hljs lang-javascript"><span class="hljs-keyword">const</span> innerComponent = render =&gt; render(
+  [<span class="hljs-string">'div'</span>, <span class="hljs-literal">null</span>, <span class="hljs-string">'hello world'</span>]
+)
+
+<span class="hljs-keyword">const</span> outerComponent = render =&gt; render(
+  [innerComponent]
+)
+</code></pre>
+<p>With JSX:</p>
+<pre><code class="hljs lang-javascript"><span class="hljs-keyword">const</span> InnerComponent = render =&gt; render(
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>hello world<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+)</span>
+
+<span class="hljs-keyword">const</span> OuterComponent = render =&gt; render(
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">InnerComponent</span> /&gt;</span>
+)</span>
+</code></pre>
+<h3 id="lifecycle">Lifecycle</h3>
+<p>Alder doesn’t have a concept of virtual component instances that can be mounted
+or unmounted. The closest analogy is:</p>
+<ul>
+<li>component function + unsubscribe function</li>
+<li>link function + unlink function</li>
+</ul>
+<p>(TODO expound)</p>
+<h3 id="events">Events</h3>
+<p>Alder treats handlers like normal properties, assigning them to the element. See the event property
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers" target="_blank">reference</a>
+on MDN.</p>
+<pre><code class="hljs lang-javascript">[<span class="hljs-string">'button'</span>, {onclick (event) {<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'button clicked:'</span>, <span class="hljs-keyword">this</span>)}}, <span class="hljs-string">'click me'</span>]
+</code></pre>
+<p>React uses a fancy synthetic event system with custom property names:</p>
+<pre><code class="hljs lang-javascript">&lt;button onClick={event =&gt; {<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'button clicked:'</span>, event.target)}}&gt;
+  click me
+&lt;<span class="hljs-regexp">/button&gt;</span>
+</code></pre>
+
+</article>
+
+
+
+<script src="scripts/app.js" async></script>

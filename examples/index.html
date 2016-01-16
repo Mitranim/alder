@@ -1,0 +1,65 @@
+<!doctype html>
+
+<base href="/alder/">
+<meta charset="utf-8">
+<title>Examples | Alder</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=2, initial-scale=1, user-scalable=yes">
+<link rel="stylesheet" href="styles/app.css">
+<link rel="icon" href="data:;base64,=">
+
+<body></body>
+
+<nav class="nav-h text-larger" style="margin-bottom: 2rem">
+  <a href="" >overview</a>
+  <a href="examples/" class="active">examples</a>
+  <a href="api/" >api</a>
+  <a href="state/" >state</a>
+  <a href="jsx/" >jsx</a>
+  <a href="server/" >server</a>
+  <a href="https://github.com/Mitranim/alder" target="_blank" class="fa fa-github"></a>
+</nav>
+
+
+<article>
+  <p>(TODO)</p>
+<p>A simple view looks like this:</p>
+<pre><code class="hljs lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">hello</span> (<span class="hljs-params">render, props</span>) </span>{
+  render(
+    [<span class="hljs-string">'div'</span>, {className: <span class="hljs-string">'greeting'</span>}, <span class="hljs-string">'Hello world!'</span>]
+  )
+}
+</code></pre>
+<p>The <code>render</code> function must be called immediately, but you’re also welcome to
+call it later, asynchronously:</p>
+<pre><code class="hljs lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">view</span> (<span class="hljs-params">render, props</span>) </span>{
+  render(
+    [<span class="hljs-string">'div'</span>, {className: <span class="hljs-string">'greeting'</span>}, <span class="hljs-string">'My name is Helen!'</span>]
+  )
+
+  setTimeout(() =&gt; {
+    render(
+      [<span class="hljs-string">'div'</span>, {className: <span class="hljs-string">'greeting'</span>}, <span class="hljs-string">'My name is Miranda!'</span>]
+    )
+  }, <span class="hljs-number">1000</span>)
+}
+</code></pre>
+<p>When setting up a recurring update, you must return an “unsubscribe” function
+that stops the update. Alder will call it when the view’s lifecycle is finished.
+Without unsubscribing, you’ll get warnings from Alder and leak memory!</p>
+<pre><code class="hljs lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">recurring</span> (<span class="hljs-params">render, props</span>) </span>{
+  render([<span class="hljs-string">'div'</span>, {}, <span class="hljs-string">'Just sit tight...'</span>])
+
+  <span class="hljs-keyword">const</span> id = setInterval(() =&gt; {
+    render([<span class="hljs-string">'div'</span>, {}, <span class="hljs-string">'The current time is: '</span>, <span class="hljs-built_in">Date</span>.now()])
+  }, <span class="hljs-number">1000</span>)
+
+  <span class="hljs-keyword">return</span> () =&gt; {clearInterval(id)}
+}
+</code></pre>
+
+</article>
+
+
+
+<script src="scripts/app.js" async></script>
