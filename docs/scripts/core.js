@@ -1,4 +1,4 @@
-import {createAtom, watcher} from 'prax'
+import {createAtom} from 'prax'
 
 /**
  * State
@@ -11,7 +11,7 @@ export const atom = createAtom({
   iterable: ['one', 'two', 'three']
 })
 
-export const {read, set, patch, monitor} = atom
+export const {read, set, patch, subscribe, watch} = atom
 
 /**
  * Rendering
@@ -19,9 +19,9 @@ export const {read, set, patch, monitor} = atom
 
 export function auto (view) {
   return function component (render, props) {
-    return monitor(watcher(read => {
+    return watch(function update (read) {
       render(view(props, read))
-    }))
+    })
   }
 }
 

@@ -11,7 +11,7 @@ which is to _isolate state_ to as few places as possible.
 This means you need some place to store your application data, and some way to
 notify views about changes.
 
-The recommended way to manage state in Alder is with
+The recommended way to manage state for Alder is with
 <a href="https://github.com/Mitranim/prax" target="_blank">Prax</a>.
 It's a library for managing immutable state that provides change detection for
 extremely efficient view updates. It also helps you organise app events in a
@@ -26,16 +26,14 @@ kind of event system, such as Redux or JSData. These examples will use Prax.
 import {createAtom} from 'prax'
 
 const atom = createAtom()
-const {watch, stop} = atom
+const {watch} = atom
 
 const auto = component => (render, props) => {
-  function update () {render(component(props))}
+  function update (read) {render(component(props, read))}
 
-  // This also immediately calls `update`.
-  watch(update)
-
-  // Unsubscribe function. Will be called by Alder when needed.
-  return () => {stop(update)}
+  // This immediately calls `update`, sets up a subscription, and returns
+  // an 'unsubscribe' function that will be called by Alder later.
+  return watch(update)
 }
 ```
 
@@ -47,7 +45,7 @@ Now use this `auto` function to create auto-updating views with minimal noise.
 import {renderAt} from 'alder'
 
 // Using `read` implicitly establishes a subscription.
-const hello = auto(props => (
+const hello = auto((props, read) => (
   ['div', {className: 'greeting'}, 'Hello ', read('name'), '!']
 ))
 

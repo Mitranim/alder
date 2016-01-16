@@ -12,6 +12,11 @@ article, .sf-article {
   counter-increment: n;
 }
 
+article {
+  * {margin: 0}
+  @extend .space-out;
+}
+
 // article, .sf-article {
 //   [data-sf-tooltip], .tooltip-host {
 //     display: inline-block;
@@ -23,6 +28,36 @@ article, .sf-article {
 
 code, pre {
   background-color: aliceblue;
+}
+
+pre {
+  margin: 0;
+}
+
+.row-between-stretch {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.col-start-stretch {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.flex-1 {flex: 1}
+
+.wide {width: 100%}
+
+.text-blue {
+  color: midnightblue;
+}
+
+.shadow {
+  box-shadow: 0 0 1px 0 lightgray;
 }
 
 /**

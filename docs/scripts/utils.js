@@ -1,17 +1,23 @@
-import {renderAt} from 'alder'
+import {renderAt, unlink} from 'alder'
 import {auto} from './core'
 
-export function renderTo (selector: string, renderFunc: Function) {
+export function renderTo (selector, renderFunc) {
   const component = auto(renderFunc)
-  onload(() => {
-    const elements = document.querySelectorAll(selector)
-    ;[].forEach.call(elements, element => {
+
+  function init () {
+    [].forEach.call(document.querySelectorAll(selector), element => {
       renderAt(element, component)
     })
-  })
+  }
+
+  onload(init)
 }
 
-export function onload (callback: Function) {
+document.addEventListener('simple-pjax-before-transition', () => {
+  unlink(document.body)
+})
+
+export function onload (callback) {
   if (/loaded|complete|interactive/.test(document.readyState)) {
     callback()
   } else {
@@ -20,4 +26,5 @@ export function onload (callback: Function) {
       callback()
     })
   }
+  document.addEventListener('simple-pjax-after-transition', callback)
 }

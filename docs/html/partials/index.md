@@ -2,7 +2,7 @@
 
 Alder is a library for writing dynamic user interfaces in JavaScript. It's a
 fresh reimplementation of ideas popularised by React, driven further in the
-direction of functional programming, inspired by Reagent and Om.
+direction of functional programming under inspiration from Reagent and Om.
 
 It's around 20 times lighter than React (≈ 6 KB minified) and has a much
 smaller API surface, but manages to solve most of the same problems.
@@ -43,7 +43,6 @@ const root = document.getElementById('app')
 renderAt(root, component, {name: 'world'})
 ```
 
-<div data-hello></div>
 <div data-state></div>
 <div data-input></div>
 <div data-unsafe></div>
@@ -51,4 +50,3 @@ renderAt(root, component, {name: 'world'})
 <div data-stamp></div>
 <div data-key></div>
 <div data-person></div>
-<div data-modal></div>

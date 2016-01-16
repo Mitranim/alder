@@ -7,7 +7,8 @@
   "scripts": {
     "start": "gulp",
     "serve-prod": "gulp build --prod && gulp server",
-    "prepublish": "gulp lib:build"
+    "prepublish": "gulp lib:build",
+    "push-docs": "gulp build --prod && (cd gh-pages && git add -A . && git commit -a -m autocommit && git push origin gh-pages)"
   },
   "authors": [
     "Mitranim <me@mitranim.com>"
@@ -44,7 +45,7 @@
     "gulp-watch": "^4.3.5",
     "highlight.js": "^9.1.0",
     "marked": "^0.3.5",
-    "prax": "0.0.18",
+    "prax": "0.0.22",
     "simple-pjax": "^0.3.0",
     "stylific-lite": "0.0.1",
     "webpack": "^1.12.10",

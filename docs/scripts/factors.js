@@ -13,7 +13,7 @@ const persons = [
 let i = -1
 
 function mockUpdate () {
-  patch(['persons'], {
+  patch(['persons', 1], {
     id: 1,
     ...persons[++i % persons.length]
   })
